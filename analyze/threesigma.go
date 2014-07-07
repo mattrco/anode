@@ -50,8 +50,8 @@ func (t *ThreeSigma) Run() {
 	}
 }
 
-// movinAvg returns the mean of the latest three values.
-// TODO: tidy up handle fewer than 3 values correctly.
+// movingAvg returns the mean of the latest three values.
+// TODO: does not handle fewer than 3 values correctly.
 func (t *ThreeSigma) movingAvg(latest float64) float64 {
 	t.tailbuf[0] = t.tailbuf[1]
 	t.tailbuf[1] = t.tailbuf[2]
