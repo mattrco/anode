@@ -1,7 +1,6 @@
 package analyze
 
 import (
-	"errors"
 	"math"
 
 	"github.com/eclesh/welford"
@@ -11,15 +10,12 @@ import (
 type ThreeSigma struct {
 	stats   *welford.Stats
 	input   chan data.Datapoint
-	outputs []chan data.Datapoint
+	outputs [4]chan data.Datapoint
 	// Stores the three latest values for calculating a moving average.
 	tailbuf [3]float64
 }
 
-func (t *ThreeSigma) Init(input chan data.Datapoint, outputs []chan data.Datapoint) error {
-	if len(outputs) != 4 {
-		return errors.New("Must supply 4 output channels")
-	}
+func (t *ThreeSigma) Init(input chan data.Datapoint, outputs [4]chan data.Datapoint) error {
 	t.stats = welford.New()
 	t.input = input
 	t.outputs = outputs
