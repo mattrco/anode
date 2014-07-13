@@ -19,8 +19,10 @@ import (
 )
 
 type GraphiteFetch struct {
-	host      string
-	metric    string
+	host   string
+	metric string
+	// Initial data range to fetch, e.g. "-24hr" will fetch last 24 hours.
+	initRange string
 	receivers []chan data.Datapoint
 }
 
@@ -40,9 +42,10 @@ type GraphiteMetric struct {
 	Datapoints [][]*json.Number `json:"datapoints"`
 }
 
-func (gf *GraphiteFetch) Init(host string, metric string, receivers []chan data.Datapoint) error {
+func (gf *GraphiteFetch) Init(host string, metric string, initRange string, receivers []chan data.Datapoint) error {
 	gf.host = host
 	gf.metric = metric
+	gf.initRange = initRange
 	gf.receivers = receivers
 	if glog.V(2) {
 		glog.Infof("Init graphite: %s: %s\n", host, metric)
@@ -52,7 +55,7 @@ func (gf *GraphiteFetch) Init(host string, metric string, receivers []chan data.
 
 func (gf *GraphiteFetch) Run() error {
 	// If the metric can't be fetched now, assume we cannot proceed.
-	err := gf.fetch("-1hr")
+	err := gf.fetch(gf.initRange)
 	if err != nil {
 		glog.Fatal(err)
 	}
