@@ -10,7 +10,7 @@ Anode ships with a Graphite input plugin, capable of fetching a named metric fro
 Just learning about metrics analysis? Have a look at this [excellent talk on anomaly detection for metrics](http://www.metaforsoftware.com/monitorama-pdx-simple-math-for-anomaly-detection/).
 
 Example
-=======
+-------
 
 Try the [three sigma](http://www.encyclopediaofmath.org/index.php/Three-sigma_rule) analyzer that's included. This works best for data with a normal (gaussian) distribution.
 
