@@ -7,6 +7,15 @@ Data analysis often starts with getting to know your data. The overarching goal 
 
 Anode ships with a Graphite input plugin, capable of fetching a named metric from graphite and streaming updates to registered analysis plugins. Each analysis plugin then streams its result to output plugins.
 
+Example
+=======
+
+```
+./anode.exp -metric=app.latency
+```
+
+New metrics will appear in graphite under `anode.threesig` which you can then plot alongside your existing metric. The screenshot below shows the original metric (lilac) with anomalous values highlighted in orange. 
+
 ![Screenshot of Three Sigma analyzer](threesigma.png)
 
 Coming soon
