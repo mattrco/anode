@@ -15,7 +15,7 @@ import (
 
 	"github.com/golang/glog"
 
-	"github.com/myrid/anode.exp/data"
+	"github.com/mattrco/anode.exp/data"
 )
 
 type GraphiteFetch struct {

@@ -3,7 +3,7 @@ package analyze
 import (
 	"testing"
 
-	"github.com/myrid/anode.exp/data"
+	"github.com/mattrco/anode.exp/data"
 )
 
 func TestThreeSigmaInit(t *testing.T) {

@@ -4,7 +4,7 @@ import (
 	"math"
 
 	"github.com/eclesh/welford"
-	"github.com/myrid/anode.exp/data"
+	"github.com/mattrco/anode.exp/data"
 )
 
 type ThreeSigma struct {
