@@ -3,7 +3,7 @@ Anode
 
 Anode is a tool for experimenting with different analysis algorithms on metrics and other time series.
 
-Data analysis often starts with getting to know your data. The overarching goal of anode is to advance the open-source offerings for metrics analysis by creating a proving ground for different approaches.
+Data analysis starts with getting to know your data. The overarching goal of anode is to advance the open-source offerings for metrics analysis by creating a proving ground for different approaches.
 
 Anode ships with a Graphite input plugin, capable of fetching a named metric from graphite and streaming updates to registered analysis plugins. Each analysis plugin then streams its result to output plugins. 
 
@@ -44,7 +44,7 @@ Heka is a more general data collection and processing system, processing much mo
 
 [etsy/skyline](https://github.com/etsy/skyline)
 
-Skyline is an anomaly detection system for time-series data.
+Skyline is an anomaly detection system for time series data.
 
 Key differences:
 
