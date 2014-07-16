@@ -10,27 +10,25 @@ import (
 )
 
 type Graphite struct {
-	name    string
-	conn    net.Conn
-	outchan chan data.Datapoint
+	conn  net.Conn
+	input chan data.Datapoint
 }
 
-func (out *Graphite) Init(graphiteHost string, name string, outchan chan data.Datapoint) error {
+func (g *Graphite) Init(graphiteHost string, input chan data.Datapoint) error {
 	conn, err := net.Dial("tcp", graphiteHost)
 	if err != nil {
 		return err
 	}
-	out.conn = conn
-	out.outchan = outchan
-	out.name = name
+	g.conn = conn
+	g.input = input
 	return nil
 }
 
-func (out *Graphite) Run() {
-	for o := range out.outchan {
+func (g *Graphite) Run() {
+	for data := range g.input {
 		// Graphite TCP format: <name> <value> <timestamp>\n
-		outs := fmt.Sprintf("%s %f %d\n", out.name, o.Value, o.Timestamp)
-		_, err := fmt.Fprintf(out.conn, outs)
+		outs := fmt.Sprintf("%s %f %d\n", data.MetricName, data.Value, data.Timestamp)
+		_, err := fmt.Fprintf(g.conn, outs)
 		if err != nil {
 			glog.Error(err)
 		}

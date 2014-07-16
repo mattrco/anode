@@ -1,6 +1,7 @@
 package data
 
 type Datapoint struct {
-	Timestamp int64
-	Value     float64
+	MetricName string
+	Timestamp  int64
+	Value      float64
 }

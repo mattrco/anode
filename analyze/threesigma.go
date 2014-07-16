@@ -1,6 +1,7 @@
 package analyze
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/eclesh/welford"
@@ -8,50 +9,69 @@ import (
 )
 
 type ThreeSigma struct {
-	stats   *welford.Stats
-	input   chan data.Datapoint
-	outputs [4]chan data.Datapoint
+	stats  *welford.Stats
+	input  chan data.Datapoint
+	output chan data.Datapoint
 	// Stores the three latest values for calculating a moving average.
 	tailbuf [3]float64
 }
 
-func (t *ThreeSigma) Init(input chan data.Datapoint, outputs [4]chan data.Datapoint) error {
+func (t *ThreeSigma) Init(input chan data.Datapoint, output chan data.Datapoint) error {
 	t.stats = welford.New()
 	t.input = input
-	t.outputs = outputs
+	t.output = output
 	return nil
 }
 
 func (t *ThreeSigma) Run() {
+	// It's useful to know how many metrics have been processed, e.g.
+	// for skipping steps that require a certain (such as moving avg.)
+	dataCount := 0
 	for d := range t.input {
 		// Add value to distribution, update mean and stddev.
 		t.stats.Add(d.Value)
 		stddev := t.stats.Stddev()
 		mean := t.stats.Mean()
 
+		t.UpdateTailbuf(d.Value)
+		dataCount += 1
+		if dataCount < 3 {
+			continue
+		}
+
 		// If difference between MA and mean > 3 sigma, send to output.
-		ma := t.movingAvg(d.Value)
+		ma := (t.tailbuf[0] + t.tailbuf[1] + t.tailbuf[2]) / 3
 		if math.Abs(ma-mean) > 3*stddev {
-			t.outputs[0] <- d
+			t.output <- data.Datapoint{
+				MetricName: fmt.Sprintf("anode.threesig.%s.anomalous", d.MetricName),
+				Timestamp:  d.Timestamp,
+				Value:      ma,
+			}
 		}
 
 		// Output mean.
-		t.outputs[1] <- data.Datapoint{Timestamp: d.Timestamp, Value: mean}
+		t.output <- data.Datapoint{
+			MetricName: fmt.Sprintf("anode.threesig.%s.mean", d.MetricName),
+			Timestamp:  d.Timestamp,
+			Value:      mean,
+		}
 
 		// Output mean +/- 3 standard deviations.
-		upper := t.stats.Mean() + 3*stddev
-		lower := t.stats.Mean() - 3*stddev
-		t.outputs[2] <- data.Datapoint{Timestamp: d.Timestamp, Value: upper}
-		t.outputs[3] <- data.Datapoint{Timestamp: d.Timestamp, Value: lower}
+		t.output <- data.Datapoint{
+			MetricName: fmt.Sprintf("anode.threesig.%s.upper", d.MetricName),
+			Timestamp:  d.Timestamp,
+			Value:      t.stats.Mean() + 3*stddev,
+		}
+		t.output <- data.Datapoint{
+			MetricName: fmt.Sprintf("anode.threesig.%s.lower", d.MetricName),
+			Timestamp:  d.Timestamp,
+			Value:      t.stats.Mean() - 3*stddev,
+		}
 	}
 }
 
-// movingAvg returns the mean of the latest three values.
-// TODO: does not handle fewer than 3 values correctly.
-func (t *ThreeSigma) movingAvg(latest float64) float64 {
+func (t *ThreeSigma) UpdateTailbuf(latest float64) {
 	t.tailbuf[0] = t.tailbuf[1]
 	t.tailbuf[1] = t.tailbuf[2]
 	t.tailbuf[2] = latest
-	ma := (t.tailbuf[0] + t.tailbuf[1] + t.tailbuf[2]) / 3
-	return ma
 }
