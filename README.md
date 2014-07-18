@@ -1,6 +1,8 @@
 Anode
 =====
 
+*New*: I've set up an IRC channel where you can ask questions. Direct your client to #anode on Freenode, or use [webchat from your browser](https://webchat.freenode.net/?url=irc%3A%2F%2Firc.freenode.net%2Fanode).
+
 Anode is a tool for experimenting with different analysis algorithms on metrics and other time series.
 
 Data analysis starts with getting to know your data. The overarching goal of anode is to advance the open-source offerings for metrics analysis by creating a proving ground for different approaches.
