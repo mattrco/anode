@@ -25,7 +25,7 @@ anode.exp -metric=app.latency
 
 This will fetch and process the last 24 hours of data. New metrics will appear in graphite under `anode.threesig` which you can then plot alongside your existing metric. The screenshot below shows the original metric (lilac) with anomalous values highlighted in orange. 
 
-![Screenshot of Three Sigma analyzer](threesigma.png)
+![Screenshot of Three Sigma analyzer](https://raw.githubusercontent.com/mattrco/anode.exp/master/threesigma.png)
 
 Coming soon
 -----------
