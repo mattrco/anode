@@ -46,6 +46,7 @@ func (t *ThreeSigma) Run() {
 				MetricName: fmt.Sprintf("anode.threesig.%s.anomalous", d.MetricName),
 				Timestamp:  d.Timestamp,
 				Value:      ma,
+				IsAnamoly:  true,
 			}
 		}
 
@@ -54,6 +55,7 @@ func (t *ThreeSigma) Run() {
 			MetricName: fmt.Sprintf("anode.threesig.%s.mean", d.MetricName),
 			Timestamp:  d.Timestamp,
 			Value:      mean,
+			IsAnamoly:  false,
 		}
 
 		// Output mean +/- 3 standard deviations.
@@ -61,11 +63,13 @@ func (t *ThreeSigma) Run() {
 			MetricName: fmt.Sprintf("anode.threesig.%s.upper", d.MetricName),
 			Timestamp:  d.Timestamp,
 			Value:      t.stats.Mean() + 3*stddev,
+			IsAnamoly:  false,
 		}
 		t.output <- data.Datapoint{
 			MetricName: fmt.Sprintf("anode.threesig.%s.lower", d.MetricName),
 			Timestamp:  d.Timestamp,
 			Value:      t.stats.Mean() - 3*stddev,
+			IsAnamoly:  false,
 		}
 	}
 }
