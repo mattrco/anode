@@ -41,12 +41,13 @@ func main() {
 	// and an output channel to propagate values back to graphite.
 	outchan := make(chan data.Datapoint)
 
-	threeSig := analyze.ThreeSigma{}
-	err = threeSig.Init(rec, outchan)
+	change := analyze.Change{}
+	// TODO: magic number alert.
+	err = change.Init(rec, outchan, 120, 30, 10)
 	if err != nil {
 		glog.Fatal(err)
 	}
-	go threeSig.Run()
+	go change.Run()
 
 	// Output values sent to outchan to graphite.
 	output := output.Graphite{}
