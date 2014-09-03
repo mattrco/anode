@@ -57,10 +57,12 @@ Key differences:
 * Skyline is production-ready and more work to get set up
 * Fairly rigid decision logic for determining whether latest updates to a series are anomalous. Algorithms each return a boolean and majority vote wins. There's no way to apply different analyses to different metrics, which is a key design point of anode.
 
+Copyright Notice and License
+----------------------------
 
 Copyright 2014 Matthew ("Matt") Cottingham
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at
 
 http://www.apache.org/licenses/LICENSE-2.0
 
