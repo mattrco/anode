@@ -1,9 +1,7 @@
 Anode
 =====
 
-**New**: [Mailing list](https://groups.google.com/forum/#!forum/anode-discuss) for users and developers.
-
-**New**: IRC channel: direct your client to #anode on Freenode, or use [webchat from your browser](https://webchat.freenode.net/?url=irc%3A%2F%2Firc.freenode.net%2Fanode).
+[Mailing list](https://groups.google.com/forum/#!forum/anode-discuss) for users and developers.
 
 Anode is a tool for experimenting with different analysis algorithms on metrics and other time series.
 
