@@ -8,10 +8,10 @@ import (
 
 	"github.com/golang/glog"
 
-	"github.com/mattrco/anode.exp/analyze"
-	"github.com/mattrco/anode.exp/data"
-	"github.com/mattrco/anode.exp/input"
-	"github.com/mattrco/anode.exp/output"
+	"github.com/mattrco/anode/analyze"
+	"github.com/mattrco/anode/data"
+	"github.com/mattrco/anode/input"
+	"github.com/mattrco/anode/output"
 )
 
 func main() {

@@ -1,7 +1,7 @@
 package analyze
 
 import (
-	"github.com/mattrco/anode.exp/data"
+	"github.com/mattrco/anode/data"
 )
 
 type Debug struct {

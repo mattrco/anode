@@ -3,7 +3,7 @@ package analyze
 import (
 	"testing"
 
-	"github.com/mattrco/anode.exp/data"
+	"github.com/mattrco/anode/data"
 )
 
 func TestDebugInit(t *testing.T) {

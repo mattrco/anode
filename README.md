@@ -15,15 +15,15 @@ Example
 Try the [three sigma](http://www.encyclopediaofmath.org/index.php/Three-sigma_rule) analyzer that's included. This works best for data with a normal (gaussian) distribution.
 
 ```
-go get github.com/mattrco/anode.exp
-anode.exp -metric=app.latency
+go get github.com/mattrco/anode
+anode -metric=app.latency
 ```
 
-(Other flags exist; [see here](https://github.com/mattrco/anode.exp/blob/master/main.go#L21)).
+(Other flags exist; [see here](https://github.com/mattrco/anode/blob/master/main.go#L21)).
 
 This will fetch and process the last 24 hours of data. New metrics will appear in graphite under `anode.threesig` which you can then plot alongside your existing metric. The screenshot below shows the original metric (lilac) with anomalous values highlighted in orange. 
 
-![Screenshot of Three Sigma analyzer](https://raw.githubusercontent.com/mattrco/anode.exp/master/threesigma.png)
+![Screenshot of Three Sigma analyzer](https://raw.githubusercontent.com/mattrco/anode/master/threesigma.png)
 
 Coming soon
 -----------
