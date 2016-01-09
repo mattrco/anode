@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"fmt"
+	"net"
 	"os"
 	"os/signal"
 
@@ -50,7 +50,7 @@ func main() {
 
 	// Output values sent to outchan to graphite.
 	output := output.Graphite{}
-	err = output.Init(fmt.Sprintf("%s:2003", *host), outchan)
+	err = output.Init(net.JoinHostPort(*host, "2003"), outchan)
 	if err != nil {
 		glog.Fatal(err)
 	}
