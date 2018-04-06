@@ -12,7 +12,7 @@ Just learning about metrics analysis? Have a look at this [excellent talk on ano
 Example
 -------
 
-Try the [three sigma](http://www.encyclopediaofmath.org/index.php/Three-sigma_rule) analyzer that's included. This works best for data with a normal (gaussian) distribution.
+A [three sigma](http://www.encyclopediaofmath.org/index.php/Three-sigma_rule) analyzer is included. This works best for data with a normal (gaussian) distribution.
 
 ```
 go get github.com/mattrco/anode.exp
@@ -24,13 +24,6 @@ anode.exp -metric=app.latency
 This will fetch and process the last 24 hours of data. New metrics will appear in graphite under `anode.threesig` which you can then plot alongside your existing metric. The screenshot below shows the original metric (lilac) with anomalous values highlighted in orange. 
 
 ![Screenshot of Three Sigma analyzer](https://raw.githubusercontent.com/mattrco/anode.exp/master/threesigma.png)
-
-Coming soon
------------
-
-* More analyzers, outputs, docs, and better-defined APIs.
-
-* Write-ups on statistical (and other) approaches to metrics analysis. You can [follow along on twitter](https://twitter.com/mattrco) to stay on top of these, but I'll link to them from this doc too.
 
 Contributions
 -------------
