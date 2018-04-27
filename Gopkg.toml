@@ -35,7 +35,7 @@
 
 [[constraint]]
   branch = "master"
-  name = "github.com/mattrco/anode.exp"
+  name = "github.com/mattrco/anode"
 
 [prune]
   go-tests = true

@@ -6,7 +6,7 @@ import (
 
 	"github.com/golang/glog"
 
-	"github.com/mattrco/anode.exp/data"
+	"github.com/mattrco/anode/data"
 )
 
 type Graphite struct {

@@ -15,7 +15,7 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/mattrco/anode.exp"
+  name = "github.com/mattrco/anode"
   packages = [
     "analyze",
     "data",
