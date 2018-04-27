@@ -1,6 +1,8 @@
 Anode
 =====
 
+[![Build Status](https://travis-ci.org/mattrco/anode.svg?branch=master)](https://travis-ci.org/mattrco/anode)
+
 Anode is a tool for experimenting with different analysis algorithms on metrics and other time series. You can read an [extended introduction to anode here](http://blog.gopheracademy.com/birthday-bash-2014/using-go-for-anomaly-detection/).
 
 Data analysis starts with getting to know your data. The overarching goal of anode is to advance the open-source offerings for metrics analysis by creating a proving ground for different approaches.
