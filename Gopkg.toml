@@ -36,7 +36,3 @@
 [[constraint]]
   branch = "master"
   name = "github.com/mattrco/anode"
-
-[prune]
-  go-tests = true
-  unused-packages = true
