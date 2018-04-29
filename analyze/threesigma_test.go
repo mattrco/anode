@@ -1,6 +1,7 @@
 package analyze
 
 import (
+	"sync"
 	"testing"
 
 	"github.com/mattrco/anode/data"
@@ -17,8 +18,9 @@ func TestThreeSigmaInit(t *testing.T) {
 }
 
 func TestThreeSigmaRun(t *testing.T) {
-	input := make(chan data.Datapoint, 1)
-	output := make(chan data.Datapoint, 1)
+	var wg sync.WaitGroup
+	input := make(chan data.Datapoint, 3)
+	output := make(chan data.Datapoint)
 
 	ts := ThreeSigma{}
 	if err := ts.Init(input, output); err != nil {
@@ -26,10 +28,18 @@ func TestThreeSigmaRun(t *testing.T) {
 	}
 	go ts.Run()
 
-	input <- data.Datapoint{Value: 1}
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for i := 0; i < 3; i++ {
+			input <- data.Datapoint{Value: 1}
+		}
+	}()
+
+	wg.Wait()
 	result := <-output
 
 	if result.Value != 1 {
-		t.Fatalf("Expected 1, got %d", result.Value)
+		t.Fatalf("Expected 1, got %f", result.Value)
 	}
 }
