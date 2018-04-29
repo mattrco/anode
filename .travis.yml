@@ -4,4 +4,4 @@ go:
     - "1.10.x"
 
 script:
-    go build
+    go test -race ./...
